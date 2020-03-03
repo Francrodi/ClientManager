@@ -20,13 +20,26 @@
                     <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('ListarClientes')" >Listar Clientes</button>
                 </div>         
                 <div id="visor" class="col">
-                    <div id="Busqueda" class="contenidoPestania" style="display: none;">
+                    <div id="Busqueda" class="contenidoPestania row h-100" style="display: none;">
                         Busqueda
+                        
                     </div>
                     <div id="NuevoCliente" class="contenidoPestania" style="display: none;">
-                        Nuevo Cliente
+                        <div style="text-align: center;">
+                            <h1>Nuevo Cliente</h1>
+                        </div>
+                        <div class="row justify-content-around" style="border-style: solid; border-color: green;">
+                            <div class="col-4" style="border-style: solid; border-color: indigo;">Nombre: <input type="text"></div>
+                            <div class="col-4" style="border-style: solid; border-color: blue;">Apellido: <input type="text"></div>
+                            <div class="col-4">Telefono: <input type="text"></div>
+                            <div class="col-4">Celular: <input type="text"></div>
+                            <div>Direccion</div>
+                        </div>
+                        
+                        
+                        <button class="btn btn-primary" onclick="agregarCliente()">Agregar cliente</button>
                     </div>
-                    <div id="ListarClientes" class="contenidoPestania" style="display: none;">
+                    <div id="ListarClientes" class="contenidoPestania row h-100" style="display: none;">
                         Listar Clientes
                     </div>                   
                 </div>                
@@ -44,6 +57,10 @@
                     nombreContenido = "#" + nombreContenido;
                     $(nombreContenido).css("display", "block")
                 });                
+            }
+
+            function agregarCliente(){
+                alert('Cliente agregado correctamente')
             }
         </script>
     </body>
