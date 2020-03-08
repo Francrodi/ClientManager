@@ -28,16 +28,23 @@
                         <div style="text-align: center;">
                             <h1>Nuevo Cliente</h1>
                         </div>
-                        <div class="row justify-content-around" style="border-style: solid; border-color: green;">
-                            <div class="col-4" style="border-style: solid; border-color: indigo;">Nombre: <input type="text"></div>
-                            <div class="col-4" style="border-style: solid; border-color: blue;">Apellido: <input type="text"></div>
-                            <div class="col-4">Telefono: <input type="text"></div>
-                            <div class="col-4">Celular: <input type="text"></div>
-                            <div>Direccion</div>
-                        </div>
+                        <form action="datosCliente">
+                            <div class="row justify-content-around" style="border-style: solid; border-color: green;">
+                                <div class="col-4" style="padding: 20px;">Nombre: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Apellido: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Telefono: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Celular: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Direccion: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Observaciones: <input type="text"></div>
+                            </div>
+                            <div class="row justify-content-center" style="padding: 30px;">
+                                <button class="btn btn-primary" onclick="agregarCliente()" type="submit">Agregar cliente</button>
+                            </div>
+                            
+                        </form>
                         
                         
-                        <button class="btn btn-primary" onclick="agregarCliente()">Agregar cliente</button>
+                        
                     </div>
                     <div id="ListarClientes" class="contenidoPestania row h-100" style="display: none;">
                         Listar Clientes
