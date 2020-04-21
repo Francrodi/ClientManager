@@ -10,16 +10,17 @@
     </head>
     <body>
        
-        <div class="container-fluid vh-100"> 
+        <div class="container-fluid vh-100"> <!-- VENTANA PRINCIPAL-->
             
-            <div class="row h-100">
+            <div class="row h-100"> <!-- SIDEBAR -->
                 <div class="col-3" style="background-color: rgb(255, 219, 224);">
                     <h1 style="font-family: Arial, Helvetica, sans-serif; text-align: center;">Menu</h1>
                     <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('Busqueda')" >Busqueda</button>
                     <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('NuevoCliente')" >Nuevo Cliente</button>
                     <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('ListarClientes')" >Listar Clientes</button>
                 </div>         
-                <div id="visor" class="col">
+                <div id="visor" class="col"> <!-- VISOR -->
+                    <button onclick="pop()">Ventana</button>
                     <div id="Busqueda" class="contenidoPestania row h-100" style="display: none;">
                         Busqueda
                         
@@ -68,6 +69,12 @@
 
             function agregarCliente(){
                 alert('Cliente agregado correctamente')
+            }
+
+            function pop(){
+                require('electron').remote.getGlobal('popWindow')()
+                //let win = new BrowserWindow({ width: 800, height: 600 })
+                //win.loadFile('test.html')
             }
         </script>
     </body>

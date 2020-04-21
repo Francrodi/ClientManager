@@ -4,14 +4,29 @@ require('electron-reload')(__dirname)
 
 function createWindow() {
 
-    let win = new BrowserWindow({
+    let mainWindow = new BrowserWindow({
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    });
 
-win.loadFile('index.html');
-win.maximize();
+
+
+
+mainWindow.loadFile('index.html');
+mainWindow.maximize();
+//win2.loadFile('test1.html');
+// win2.once("ready-to-show", win2.show());
 }
 
-app.whenReady().then(createWindow)
+global.popWindow = function() {
+    let win2 = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
+    win2.loadFile('test.html')
+}
+
+app.whenReady().then(createWindow);
+//app.whenReady().then(popWindow);
