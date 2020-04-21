@@ -15,8 +15,6 @@ function createWindow() {
 
 mainWindow.loadFile('index.html');
 mainWindow.maximize();
-//win2.loadFile('test1.html');
-// win2.once("ready-to-show", win2.show());
 }
 
 global.popWindow = function() {
@@ -29,4 +27,3 @@ global.popWindow = function() {
 }
 
 app.whenReady().then(createWindow);
-//app.whenReady().then(popWindow);
