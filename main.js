@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, BrowserView} = require('electron');
 require('electron-reload')(__dirname)
 
 
@@ -8,10 +8,15 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true
         }
+        
     });
 
-
-
+/* BROWSER VIEW
+let view = new BrowserView()
+mainWindow.setBrowserView(view)
+view.setBounds({x: 0, y: 0, width: 200, height: 200})
+view.webContents.loadFile('test.html')
+*/
 
 mainWindow.loadFile('index.html');
 mainWindow.maximize();
@@ -25,5 +30,7 @@ global.popWindow = function() {
     });
     win2.loadFile('test.html')
 }
+
+
 
 app.whenReady().then(createWindow);
