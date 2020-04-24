@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <!--BOOTSTRAP-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>
+            Clientes Marco
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body>
+       
+        <div class="container-fluid vh-100"> <!-- VENTANA PRINCIPAL-->
+            
+            <div class="row h-100"> <!-- SIDEBAR -->
+                <div class="col-3" style="background-color: rgb(255, 219, 224);">
+                    <h1 style="font-family: Arial, Helvetica, sans-serif; text-align: center;">Menu</h1>
+                    <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('Busqueda')" >Busqueda</button>
+                    <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('NuevoCliente')" >Nuevo Cliente</button>
+                    <button class="btn btn-primary btn-block btn-lg" style="background-color: darkmagenta;" onclick="mostrarContenido('ListarClientes')" >Listar Clientes</button>
+                </div>         
+                <div id="visor" class="col"> <!-- VISOR -->
+                    <button onclick="pop()">Ventana</button>
+                    <div id="Busqueda" class="contenidoPestania row h-100" style="display: none;">
+                        Busqueda
+                        
+                    </div>
+                    <div id="NuevoCliente" class="contenidoPestania" style="display: none;">
+                        <div style="text-align: center;">
+                            <h1>Nuevo Cliente</h1>
+                        </div>
+                        <form action="datosCliente">
+                            <div class="row justify-content-around" style="border-style: solid; border-color: green;">
+                                <div class="col-4" style="padding: 20px;">Nombre: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Apellido: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Telefono: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Celular: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Direccion: <input type="text"></div>
+                                <div class="col-4" style="padding: 20px;">Observaciones: <input type="text"></div>
+                            </div>
+                            <div class="row justify-content-center" style="padding: 30px;">
+                                <button class="btn btn-primary" onclick="agregarCliente()" type="submit">Agregar cliente</button>
+                            </div>
+                            
+                        </form>
+                        
+                        
+                        
+                    </div>
+                    <div id="ListarClientes" class="contenidoPestania row h-100" style="display: none;">
+                        Listar Clientes
+                    </div>                   
+                </div>                
+            </div>  
+            
+        </div>
+        <script>window.$ = window.jQuery = require('jquery');</script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script>
+            function mostrarContenido(nombreContenido) {
+                $(document).ready(function(){
+                    $(".contenidoPestania").css("display", "none");
+                    nombreContenido = "#" + nombreContenido;
+                    $(nombreContenido).css("display", "block")
+                });                
+            }
+
+            function agregarCliente(){
+                alert('Cliente agregado correctamente')
+            }
+
+            function pop(){
+                require('electron').remote.getGlobal('popWindow')()
+                //let win = new BrowserWindow({ width: 800, height: 600 })
+                //win.loadFile('test.html')
+            }
+        </script>
+    </body>
+    
+</html>
