@@ -11,7 +11,8 @@ function createWindow() {
         
     });
 
-/* BROWSER VIEW
+/* BROWSER VIEW: funcion opcional de embeber ventanas en la principal, posible implementacion a futuro
+
 let view = new BrowserView()
 mainWindow.setBrowserView(view)
 view.setBounds({x: 0, y: 0, width: 200, height: 200})
@@ -22,6 +23,7 @@ mainWindow.loadFile('index.html');
 mainWindow.maximize();
 }
 
+/*  
 global.popWindow = function() {
     let win2 = new BrowserWindow({
         webPreferences: {
@@ -30,7 +32,7 @@ global.popWindow = function() {
     });
     win2.loadFile('test.html')
 }
-
+*/
 
 
 app.whenReady().then(createWindow);

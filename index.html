@@ -4,27 +4,59 @@
         <title>Clientes</title>
         <script defer>
             const { BrowserWindow } = require('electron').remote
-            
+            var mainWinDisabled = false;
+            var botones = document.getElementsByClassName("boton-principal");
+
+            function desactivarBotones(activado){
+                for (i = 0; i < botones.length; i++){
+                    botones[i].disabled = activado;
+                }
+            }
+
             function popBuscar(){
-                alert('Buscar')
-                let ventanaBusqueda = new BrowserWindow({})
-                ventanaBusqueda.loadFile('busqueda.html')
+                //alert('Buscar')
+                if (!mainWinDisabled){
+                    desactivarBotones(true);
+                    let ventanaBusqueda = new BrowserWindow({});
+                    mainWinDisabled = true;
+                    ventanaBusqueda.loadFile('busqueda.html');
+                    ventanaBusqueda.on('closed', () => {
+                        desactivarBotones(false);
+                        mainWinDisabled = false;
+                        });
+                }
             }
             function popAgregar(){
-                alert('Agregar')
-                let ventanaAgregar = new BrowserWindow({})
-                ventanaAgregar.loadFile('agregarCliente.html')
+                //alert('Agregar')
+                if (!mainWinDisabled){
+                    desactivarBotones(true);
+                    let ventanaAgregar = new BrowserWindow({});
+                    mainWinDisabled = true;
+                    ventanaAgregar.loadFile('agregarCliente.html');
+                    ventanaAgregar.on('closed', () => {
+                        desactivarBotones(false);
+                        mainWinDisabled = false;
+                        });
+                }
             }
             function popListar(){
-                alert('Listar')
-                let ventanaListar = new BrowserWindow({})
-                ventanaListar.loadFile('listarClientes.html')
+                //alert('Listar')
+                if (!mainWinDisabled){
+                    desactivarBotones(true);
+                    let ventanaListar = new BrowserWindow({});
+                    mainWinDisabled = true;
+                    ventanaListar.loadFile('listarClientes.html');
+                    ventanaListar.on('closed', () => {
+                        desactivarBotones(false);
+                        mainWinDisabled = false;
+                        });
+                }
             }
         </script>
     </head>
     <body>
-        <button onclick="popBuscar()">Buscar</button>
-        <button onclick="popAgregar()">Agregar Cliente</button>
-        <button onclick="popListar()">Listar Clientes</button>
+        <button class="boton-principal" onclick="popBuscar()">Buscar</button>
+        <button class="boton-principal" onclick="popAgregar()">Agregar Cliente</button>
+        <button class="boton-principal" onclick="popListar()">Listar Clientes</button>
     </body>
 </html>
