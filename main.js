@@ -7,32 +7,28 @@ function createWindow() {
     let mainWindow = new BrowserWindow({
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        show: false,
+        height: 600,
+        width: 800
+
         
     });
+    let winVisor = mainWindow.getBounds();
+    console.log(winVisor.height);
+    let sidebar = new BrowserView();
+    mainWindow.addBrowserView(sidebar);
+    sidebar.setBounds({x: 0, y: 0, width: winVisor.width*0.30, height: winVisor.height});
+    sidebar.webContents.loadFile('sidebar.html');
+    sidebar.setAutoResize({width: true, height: true});
 
-/* BROWSER VIEW: funcion opcional de embeber ventanas en la principal, posible implementacion a futuro
-
-let view = new BrowserView()
-mainWindow.setBrowserView(view)
-view.setBounds({x: 0, y: 0, width: 200, height: 200})
-view.webContents.loadFile('test.html')
-*/
-
-mainWindow.loadFile('index.html');
-mainWindow.maximize();
+    let content = new BrowserView();
+    mainWindow.addBrowserView(content);
+    content.setBounds({x: winVisor.width*0.30, y: 0, width: winVisor.width*0.70, height: winVisor.height});
+    content.webContents.loadFile('content.html');
+    content.setAutoResize({width: true, height: true});
+    mainWindow.show();
 }
-
-/*  
-global.popWindow = function() {
-    let win2 = new BrowserWindow({
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
-    win2.loadFile('test.html')
-}
-*/
 
 
 app.whenReady().then(createWindow);
