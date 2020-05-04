@@ -20,13 +20,13 @@ function createWindow() {
     mainWindow.addBrowserView(sidebar);
     sidebar.setBounds({x: 0, y: 0, width: winVisor.width*0.30, height: winVisor.height});
     sidebar.webContents.loadFile('sidebar.html');
-    sidebar.setAutoResize({width: true, height: true});
+    sidebar.setAutoResize({width: true, height: true, horizontal: true, vertical: true});
 
     let content = new BrowserView();
     mainWindow.addBrowserView(content);
     content.setBounds({x: winVisor.width*0.30, y: 0, width: winVisor.width*0.70, height: winVisor.height});
     content.webContents.loadFile('content.html');
-    content.setAutoResize({width: true, height: true});
+    content.setAutoResize({width: true, height: true, horizontal: true, vertical: true});
     mainWindow.show();
 }
 
