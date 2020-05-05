@@ -1,49 +1,65 @@
-const { app, BrowserWindow, BrowserView } = require("electron");
+const { app, BrowserWindow, BrowserView, ipcMain } = require("electron");
 require("electron-reload")(__dirname);
 
 function createWindow() {
     let mainWindow = new BrowserWindow({
         webPreferences: {
-            nodeIntegration: true,
+            nodeIntegration: true
         },
-        show: false,
-        height: 800,
-        width: 800,
+        frame: false,
+        show: true,
+        height: 600,
+        width: 960,
     });
+
     let winVisor = mainWindow.getBounds();
-    console.log(winVisor.height);
-    let sidebar = new BrowserView();
+    console.log(winVisor.height + " " + winVisor.width);
+
+    let sidebar = new BrowserView({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
     mainWindow.addBrowserView(sidebar);
     sidebar.setBounds({
         x: 0,
         y: 0,
-        width: winVisor.width * 0.3,
-        height: 800,
+        width: 320,
+        height: 600,
     });
-    sidebar.webContents.loadFile("./src/sidebar.html");
     sidebar.setAutoResize({
         width: true,
         height: true,
         horizontal: true,
         vertical: true,
     });
-
-    let content = new BrowserView();
+    sidebar.webContents.loadFile("./src/sidebar.html");
+    
+    let content = new BrowserView({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
     mainWindow.addBrowserView(content);
     content.setBounds({
-        x: winVisor.width * 0.3,
+        x: 320,
         y: 0,
-        width: winVisor.width * 0.7,
-        height: 800,
+        width: 640,
+        height: 600,
     });
-    content.webContents.loadFile("content.html");
     content.setAutoResize({
         width: true,
         height: true,
         horizontal: true,
         vertical: true,
     });
+    content.webContents.loadFile("content.html");
     mainWindow.show();
 }
 
 app.whenReady().then(createWindow);
+
+ipcMain.on('cerrar', (evt, args) => {
+    console.log('main - cerrando')
+    app.quit();
+});

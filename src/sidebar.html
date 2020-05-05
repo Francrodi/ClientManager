@@ -5,12 +5,17 @@
         <title>sidebar</title>
     </head>
     <body>
+        <button class="cerrar" id="btn-cerrar">X</button>
         <div class="botones">
-            <button class="boton-principal ncliente">Nuevo Cliente</button>
-            <button class="boton-principal bcliente">Buscar Cliente</button>
-            <button class="boton-principal lclientes">
-                Listar Clientes
-            </button>
+            <button class="boton-principal">Nuevo Cliente</button>
+            <button class="boton-principal">Buscar Cliente</button>
+            <button class="boton-principal">Listar Clientes</button>
         </div>
     </body>
+    <script>
+        const { ipcRenderer } = require('electron');
+        document.getElementById('btn-cerrar').addEventListener('click', () => {
+            ipcRenderer.send('cerrar');
+        });
+    </script>
 </html>
