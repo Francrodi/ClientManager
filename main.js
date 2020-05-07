@@ -60,6 +60,11 @@ function createWindow() {
 app.whenReady().then(createWindow);
 
 ipcMain.on('cerrar', (evt, args) => {
-    console.log('main - cerrando')
+    console.log('Cerrando...');
     app.quit();
 });
+
+ipcMain.on('nueva-ventana', (evt, args) => {
+    console.log('nueva-ventana');
+    console.log(args);
+})

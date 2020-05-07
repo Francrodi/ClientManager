@@ -7,9 +7,9 @@
     <body>
         <button class="cerrar" id="btn-cerrar">X</button>
         <div class="botones">
-            <button class="boton-principal">Nuevo Cliente</button>
-            <button class="boton-principal">Buscar Cliente</button>
-            <button class="boton-principal">Listar Clientes</button>
+            <button class="boton-principal" id="btn-nuevo-cliente">Nuevo Cliente</button>
+            <button class="boton-principal" id="btn-buscar-cliente">Buscar Cliente</button>
+            <button class="boton-principal" id="btn-listar-clientes">Listar Clientes</button>
         </div>
     </body>
     <script>
@@ -17,5 +17,12 @@
         document.getElementById('btn-cerrar').addEventListener('click', () => {
             ipcRenderer.send('cerrar');
         });
+        var botones = document.getElementsByClassName('boton-principal');
+        for (let i = 0; i < botones.length; i++) {
+            botones[i].addEventListener('click', () => {
+                ipcRenderer.send('nueva-ventana', botones[i].id)
+            })
+            
+        }
     </script>
 </html>
