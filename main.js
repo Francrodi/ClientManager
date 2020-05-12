@@ -4,7 +4,7 @@ require("electron-reload")(__dirname);
 function createWindow() {
     let mainWindow = new BrowserWindow({
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
         },
         frame: false,
         show: true,
@@ -12,13 +12,10 @@ function createWindow() {
         width: 960,
     });
 
-    let winVisor = mainWindow.getBounds();
-    console.log(winVisor.height + " " + winVisor.width);
-
     let sidebar = new BrowserView({
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+        },
     });
     mainWindow.addBrowserView(sidebar);
     sidebar.setBounds({
@@ -34,11 +31,11 @@ function createWindow() {
         vertical: true,
     });
     sidebar.webContents.loadFile("./src/sidebar.html");
-    
+
     let content = new BrowserView({
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+        },
     });
     mainWindow.addBrowserView(content);
     content.setBounds({
@@ -54,17 +51,41 @@ function createWindow() {
         vertical: true,
     });
     content.webContents.loadFile("content.html");
+    console.log(content.id); // 2
     mainWindow.show();
+}
+
+function cargarVentana(args, id) {
+    switch (args) {
+        case "btn-buscar-cliente":
+            BrowserView.fromId(id).webContents.loadFile("src/busqueda.html");
+            break;
+
+        case "btn-nuevo-cliente":
+            BrowserView.fromId(id).webContents.loadFile(
+                "src/agregarCliente.html"
+            );
+            break;
+
+        case "btn-listar-clientes":
+            BrowserView.fromId(id).webContents.loadFile(
+                "src/listarClientes.html"
+            );
+            break;
+
+        default:
+            console.log("Error");
+            break;
+    }
 }
 
 app.whenReady().then(createWindow);
 
-ipcMain.on('cerrar', (evt, args) => {
-    console.log('Cerrando...');
+ipcMain.on("cerrar", (evt, args) => {
+    console.log("Cerrando...");
     app.quit();
 });
 
-ipcMain.on('nueva-ventana', (evt, args) => {
-    console.log('nueva-ventana');
-    console.log(args);
-})
+ipcMain.on("nueva-ventana", (evt, args) => {
+    cargarVentana(args, 2);
+});
