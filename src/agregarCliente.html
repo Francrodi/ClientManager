@@ -13,22 +13,19 @@
             <input type="text" id="apellido" />
             <label for="telefono">Telefono:</label>
             <input required type="number" id="telefono" />
-            <input type="submit" id="boton-submit" value="Agregar">
+            <label for="direccion">Direccion:</label>
+            <input type="text" id="direccion" />
+            <label for="observaciones">Observaciones:</label>
+            <input type="text" id="observaciones" />
+            <input type="submit" id="boton-submit" value="Agregar" />
         </form>
     </body>
     <script type="text/javascript " src="script.js"></script>
     <script>
         const { ipcRenderer } = require("electron");
         document.getElementById("cliente-form").onsubmit = async function () {
-            //if formValida()
             const formJson = toJson(document.forms[0].elements);
-            ipcRenderer.send(
-                "cliente-form",
-                formJson
-            );
+            ipcRenderer.send("cliente-form", formJson);
         };
-        function toJson(elements){
-            return 'form'
-        }
     </script>
 </html>

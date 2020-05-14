@@ -91,5 +91,5 @@ ipcMain.on("nueva-ventana", (evt, args) => {
 });
 
 ipcMain.on("cliente-form", (evt, args) => {
-    console.log(`form recibida! args = ${args}`);
+    console.log(args);
 });
