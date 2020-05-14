@@ -89,3 +89,7 @@ ipcMain.on("cerrar", (evt, args) => {
 ipcMain.on("nueva-ventana", (evt, args) => {
     cargarVentana(args, 2);
 });
+
+ipcMain.on("cliente-form", (evt, args) => {
+    console.log(`form recibida! args = ${args}`);
+});
