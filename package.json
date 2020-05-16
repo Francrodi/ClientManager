@@ -9,10 +9,12 @@
   "author": "Francisco Crocamo",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^8.2.3"
+    "electron": "^8.3.0",
+    "electron-rebuild": "^1.11.0"
   },
   "dependencies": {
     "electron-reload": "^1.5.0",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "sqlite3": "^4.2.0"
   }
 }
