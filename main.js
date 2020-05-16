@@ -68,16 +68,30 @@ function cargarVentana(args, id) {
             break;
 
         case "btn-listar-clientes":
+            db.all(
+                "SELECT * FROM clientes ORDER BY telefono",
+                [],
+                (err, rows) => {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        rows.forEach((row) => {
+                            console.log(row);
+                        });
+                    }
+                }
+            );
             BrowserView.fromId(id).webContents.loadFile(
                 "src/listarClientes.html"
             );
             break;
 
         default:
-            console.log("Error");
+            console.log("Error cargando ventana");
             break;
     }
 }
+
 // CONECTAR A BASE DE DATOS
 const db = new sqlite3.Database(":memory:", (err) => {
     if (err) {
@@ -85,6 +99,8 @@ const db = new sqlite3.Database(":memory:", (err) => {
     }
     console.log("Conexion con base de datos establecida...");
 });
+
+// CREAR TABLA CLIENTES
 const sqlCrearTabla = `CREATE TABLE IF NOT EXISTS clientes(
     nombre TEXT NOT NULL,
     apellido TEXT,
@@ -92,7 +108,6 @@ const sqlCrearTabla = `CREATE TABLE IF NOT EXISTS clientes(
     direccion TEXT,
     observaciones TEXT
 )`;
-
 db.run(sqlCrearTabla, () => {
     console.log("Tabla Creada");
 });
@@ -114,6 +129,7 @@ ipcMain.on("nueva-ventana", (evt, args) => {
     cargarVentana(args, 2);
 });
 
+//######## AGREGAR CLIENTE ########
 ipcMain.on("cliente-form", (evt, args) => {
     console.log(args);
     db.run(
@@ -123,7 +139,7 @@ ipcMain.on("cliente-form", (evt, args) => {
         {
             $nombre: args.nombre,
             $apellido: args.apellido,
-            $telefono: args.telefono,
+            $telefono: args.telefono, // No se inserta correctamente (null)
             $direccion: args.direccion,
             $observaciones: args.observaciones,
         },
@@ -135,13 +151,12 @@ ipcMain.on("cliente-form", (evt, args) => {
             }
         }
     );
-    db.all("SELECT * FROM clientes", [], (err, rows) => {
-        if (err) {
-            console.error(err);
-        } else {
-            rows.forEach((row) => {
-                console.log(row);
-            });
-        }
+});
+
+// ######## BUSCAR CLIENTE ########
+ipcMain.on("get-cliente", (evt, args) => {
+    console.log(`Consultando por ${args}`);
+    db.get("SELECT * FROM clientes WHERE telefono = (?)", args, (err, row) => {
+        console.log(row);
     });
 });

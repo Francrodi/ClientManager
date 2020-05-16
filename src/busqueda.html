@@ -5,5 +5,19 @@
     </head>
     <body bgcolor="lightblue">
         <h1>Busqueda</h1>
+        <label for="telefono"></label>
+        <input type="number" id="telefono" />
+        <button id="btnBuscar">Buscar</button>
     </body>
+    <script>
+        const { ipcRenderer } = require("electron");
+        document
+            .getElementById("btnBuscar")
+            .addEventListener("click", (evt) => {
+                ipcRenderer.send(
+                    "get-cliente",
+                    document.getElementById("telefono").value
+                );
+            });
+    </script>
 </html>

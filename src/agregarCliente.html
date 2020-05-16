@@ -24,7 +24,7 @@
     <script>
         const { ipcRenderer } = require("electron");
         document.getElementById("cliente-form").onsubmit = async function () {
-            const formJson = toJson(document.forms[0].elements);
+            const formJson = parseForm(document.forms[0].elements); // tecnicamente no es json pero se entiende
             ipcRenderer.send("cliente-form", formJson);
         };
     </script>
